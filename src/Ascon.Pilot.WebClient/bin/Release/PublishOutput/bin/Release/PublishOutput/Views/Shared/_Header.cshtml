@@ -1,0 +1,86 @@
+﻿@using System.Threading.Tasks
+@using Ascon.Pilot.WebClient.Models
+@using Microsoft.AspNetCore.Http.Extensions
+@{
+    FilesPanelType currentFilesPanelType = ViewBag.FilesPanelType ?? default(FilesPanelType);
+}
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Переключить навигацию</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+                @*<a id="menuToggler" role="button" title="Меню" onclick="toggleMenu(this)"><span class="glyphicon glyphicon-menu-hamburger"></span></a>*@
+                <a asp-controller="Home" asp-action="Index" >
+                    <img src="@Url.Content("~/images/ascon_logo.png")" height="25" alt="АСКОН"/>
+                </a>
+            </div>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right" style="margin-right: 0;">
+                <li></li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>
+                        <a>Вы в системе, <b>@User.Identity.Name</b></a>
+                    </li>
+                    <li>
+                        <a asp-controller="Account" asp-action="LogOff">Выйти</a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a asp-controller="Account" asp-action="LogIn">Авторизоваться</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+@if (User.Identity.IsAuthenticated && ViewContext.RouteData.Values["controller"].ToString() == "Files")
+{
+    <div class="navbar navbar-inverse toolbar">
+        <div>
+            <div class="navbar-header pull-right">
+                <div class="navbar-brand">
+                    <a id="downloadButton" href="#" role="button" title="Скачать" style="display: none;" target="_blank">
+                        <span class="glyphicon glyphicon-download-alt"></span>&nbsp;
+                        <span class="hidden-xs">Скачать</span>
+                    </a>
+                    <a id="downloadArchiveButton" role="button" onclick="downloadArchive(this)" title="Скачать архивом" style="display: none;">
+                        <span class="glyphicon glyphicon-folder-close"></span>&nbsp;
+                        <span class="hidden-xs">Скачать&nbsp;архивом</span>
+                    </a>
+                    <a id="filesPanelToggler"
+                       href="@Url.Action("ChangeFilesPanelType", "Files", new {type = currentFilesPanelType == FilesPanelType.List ? FilesPanelType.Grid : FilesPanelType.List, returnUrl = Context.Request.GetDisplayUrl()})"
+                       title="Режим отображения: @(currentFilesPanelType == FilesPanelType.List ? "список" : "плитки")">
+                        <span class="glyphicon @(currentFilesPanelType == FilesPanelType.List ? "glyphicon-th-list" : "glyphicon-th")"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">    
+    function toggleMenu(el) {        
+        var menu = $("#menu");
+        if (menu.hasClass("menu-slide-in")) {
+            menu.toggleClass("menu-slide-in menu-slide-out");
+            menu.show();
+        } else if (menu.hasClass("menu-slide-out")) {
+            menu.show();
+            menu.toggleClass("menu-slide-in menu-slide-out");
+        }
+    }
+    
+    function hideMenu() {
+        $("#menu").removeClass("menu-slide-in").addClass("menu-slide-out");
+    }
+</script>

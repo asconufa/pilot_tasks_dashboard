@@ -1,0 +1,45 @@
+﻿@using System.Globalization
+@using System.Threading.Tasks
+@model Ascon.Pilot.WebClient.ViewModels.FileViewModel
+@{
+    var name = Model.Name;
+    var fileDownloadRouteValues = new { id = Model.Id, size = Model.Size, name = name.EndsWith(Model.Extension) ? name : $"{name}{Model.Extension}" };
+    string href;
+    var isThumbnail = false;
+    if (isThumbnail)
+    {
+        href = Url.Action("Thumbnail", "Files", new { id = Model.Id, size = Model.Size, extension = Model.Extension, typeId = Model.ObjectTypeId });
+    }
+    else
+    {
+        href = Url.Action("GetTypeIcon", "Home", new { id = Model.ObjectTypeId });
+    }
+}
+
+<div class="file-card @(isThumbnail ? "with-thumbnail" : "")" onclick="processCardClick(this)" 
+     data-id="@Model.Id" data-name="@Html.Raw(name)" data-size="@Model.Size" data-ext="@Model.Extension" data-typeid="@Model.ObjectTypeId">
+    <div class="file-card-icon">
+        <div>
+            <img src="@href" alt="@name"/>
+        </div>
+        <input name="objectsIds" type="checkbox" value="@Model.ObjectId" />
+    </div>
+    <div class="file-card-name">
+        <a onclick="processFileCardClick(this)" role="button">
+            @name
+        </a>
+    </div>
+    <div class="file-card-info">
+        <span class="pull-right text-right hidden-xs hidden-sm">
+            Изменен: @Model.LastModifiedDate.ToString("g", new CultureInfo("ru-RU"))<br/>
+            Размер: @Model.SizeString
+        </span>
+    </div>
+    <div class="file-card-buttons">
+        <div class="btn-group">
+            <a title="Скачать файл" href="@Url.Action("Download", "Files", fileDownloadRouteValues)" class="btn btn-default">
+                <span class="glyphicon glyphicon-download-alt"></span>
+            </a>
+        </div>
+    </div>
+</div>

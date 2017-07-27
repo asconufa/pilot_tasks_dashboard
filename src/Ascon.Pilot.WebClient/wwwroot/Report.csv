@@ -1,0 +1,7 @@
+﻿Заголовок задания;Инициатор;Исполнитель;Срок;Завершено;
+Task task = new Task();;Jim Brown;Streltsov Vasiliy;12.07.2017 23:59:59;11.07.2017 14:52:55;
+Task #2;Jim Brown;John Raiten;11.07.2017 14:56:00;12.07.2017 16:19:40;
+Da task';Streltsov Vasiliy;Jim Brown;12.07.2017 23:59:59;11.07.2017 16:11:49;
+'nother tsk;Streltsov Vasiliy;Jim Brown;12.07.2017 16:25:00;Не завершено;
+Code Monkey wake up;Streltsov Vasiliy;Jihm Beem;14.07.2017 23:59:59;13.07.2017 13:24:39;
+Title;Streltsov Vasiliy;Jihm Beem;21.07.2017 23:59:59;21.07.2017 1:27:39;

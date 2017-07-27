@@ -1,0 +1,21 @@
+﻿@model Queue<KeyValuePair<string, string>>
+
+<ol class="breadcrumb" id="breadcrumbs" style="margin-bottom: 15px;">
+    @if (Model != null && Model.Any())
+    {
+        var first = Model.First();
+        foreach (var crumb in Model.Reverse())
+        {
+            if (crumb.Key.Equals(first.Key))
+            {
+                <li class="active">@crumb.Value</li>
+            }
+            else
+            {
+                <li>
+                    <a href="@crumb.Key">@crumb.Value</a>
+                </li>
+            }
+        }
+    }
+</ol>

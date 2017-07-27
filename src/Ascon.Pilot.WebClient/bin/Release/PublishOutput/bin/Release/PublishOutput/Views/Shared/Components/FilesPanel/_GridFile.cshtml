@@ -1,0 +1,30 @@
+﻿@model Ascon.Pilot.WebClient.ViewModels.FileViewModel
+@{
+    var name = Model.Name;
+    var isThumbnail = Model.IsThumbnailAvailable;
+}
+
+<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 file-card @(isThumbnail ? "with-thumbnail" : "")" onclick="processCardClick(this)"
+     data-id="@Model.Id" data-name="@Html.Raw(name)" data-size="@Model.Size" data-ext="@Model.Extension" data-typeid="@Model.ObjectTypeId">
+    <div class="file-card-icon">
+        @{
+            var href = Url.Action("GetTypeIcon", "Home", new { id = Model.ObjectTypeId });
+            if (isThumbnail)
+            {
+                href = Url.Action("Image", "Files", new { id = Model.Id, size = Model.Size, extension = Model.Extension, typeId = Model.ObjectTypeId });
+            }
+        }
+        <div class="center-block">
+            <img src="@href" alt="@Model.Name"/>
+        </div>
+        <input name="objectsIds" type="checkbox" value="@Model.ObjectId" />
+    </div>
+    <div class="file-card-name">
+        <a onclick="processFileCardClick(this)" role="button">
+            @name
+        </a>
+    </div>
+</div>
+
+
+

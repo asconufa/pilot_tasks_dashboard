@@ -1,0 +1,18 @@
+﻿@using Newtonsoft.Json
+@model Ascon.Pilot.WebClient.ViewModels.SidePanelViewModel
+@{
+    var treeData = Model.ToDynamic();
+    var serializedTreeData = JsonConvert.SerializeObject(treeData);
+}
+
+<div>
+    <div id="tree"></div>
+</div>
+
+<div id="sidePanelProgress" class="text-center" style="display: none;">
+    <i class="glyphicon glyphicon-spin glyphicon-refresh"></i>
+</div>
+
+<script type="text/javascript">
+    window.treeData = @Html.Raw(serializedTreeData);
+</script>

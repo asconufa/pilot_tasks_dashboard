@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Главная";
+}
+
+<style>
+    a:hover {
+        text-decoration: none;
+    }
+    h2 {
+    }
+</style>
+
+<div class="col-md-push-5" style="display: table; width: 100%; height: 400px; vertical-align: middle;">
+    <div style="display: table-cell; vertical-align: middle;">
+        <div style="width: 200px; margin: auto">
+            <a href="@Url.Action("Index", "Files")">
+                <h2>
+                    <i class="glyphicon glyphicon-file"></i>&nbsp;Документы
+                </h2>
+            </a>
+            <a href="@Url.Action("Tasks", "Home", "all")">
+                <h2>
+                    <i class="glyphicon glyphicon-tasks"></i>&nbsp;Задания
+                </h2>
+            </a>
+            <!--<a href="#">
+                <h2>
+                    <i class="glyphicon glyphicon-list-alt"></i>&nbsp;Отчеты
+                </h2>
+            </a>-->
+        </div>
+    </div>
+</div>

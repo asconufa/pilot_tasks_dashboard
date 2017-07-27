@@ -1,0 +1,22 @@
+﻿<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="uploadModalLabel"><span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;Загрузить</h4>
+            </div>
+            <div class="modal-body">
+                <form id="uploadForm" action="@Url.Action("Upload", "Files")" method="post" class="dropzone" enctype="multipart/form-data">
+                    @Html.Hidden("uploadRootId")
+                    @Html.Hidden("folderId")
+                    <input type="file" name="file" id="file"/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="$('#uploadForm').submit()" class="btn btn-primary">Загрузить</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+

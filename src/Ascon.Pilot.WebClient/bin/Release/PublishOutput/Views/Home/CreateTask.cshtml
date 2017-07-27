@@ -1,0 +1,24 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<html>
+    <head>
+        <title>Создать задание</title>
+    </head>
+    <body>
+        <form method="post" action="~/Home/TaskCreated">
+            <h2 align="center">Создать новое задание:</h2>
+            <h5>Заголовок задания:</h5>
+            <input type="text" name="TaskTitle"/>
+            <h5>Описание задания:</h5>
+            <textarea name="TaskDecription" cols="45" rows="6"></textarea>
+            <h5>Срок выполнения:</h5>
+            <input type="datetime" name="DeadlineDate"/>
+            <h5>Исполнитель:</h5>
+            <input type="text" name="ExecutorName"/>
+            <input type="submit" value="Создать задание"/>
+        </form>
+    </body>
+</html>

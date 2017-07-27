@@ -1,0 +1,65 @@
+﻿@using System.Threading.Tasks
+@using Ascon.Pilot.WebClient.ViewModels
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model LogInViewModel
+@{
+    ViewBag.Title = "Войти";
+}
+
+@section title {
+    <h2>
+        @ViewBag.Title
+    </h2>
+    <br/>
+}
+
+@using (Html.BeginForm("LogIn", "Account", FormMethod.Post, new {@class = "form-horizontal"}))
+{
+    @Html.ValidationSummary(true)
+    <div class="form-group">
+        @Html.LabelFor(x => x.DatabaseName, new {@class = "control-label col-sm-3"})
+        <div class="col-sm-9">
+            @Html.TextBoxFor(x => x.DatabaseName, new {@class = "form-control"})
+            <p class="help-block">@Html.ValidationMessageFor(x => x.DatabaseName)</p>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Login, new {@class = "control-label col-sm-3"})
+        <div class="col-sm-9">
+            @Html.TextBoxFor(x => x.Login, new {@class = "form-control"})
+            <p class="help-block">@Html.ValidationMessageFor(x => x.Login)</p>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Password, new {@class = "control-label col-sm-3"})
+        <div class="col-sm-9">
+            @Html.PasswordFor(x => x.Password, new {@class = "form-control"})
+            <p class="help-block">@Html.ValidationMessageFor(x => x.Password)</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="checkbox col-sm-offset-3 col-sm-9">
+            <label>
+                @Html.EditorFor(x => x.RememberMe) Запомнить меня
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" onclick="processLogin(this)" class="btn btn-primary">
+                <i id="loginProgress" style="display: none;" class="glyphicon glyphicon-spin glyphicon-refresh"></i>&nbsp;Войти
+            </button>
+        </div>
+    </div>
+}
+
+@section scripts {
+    <script type="text/javascript" src="@Url.Content("~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js")"></script>
+    <script type="text/javascript">
+        function processLogin(button) {
+            $(button).prop('disabled', true);
+            $('#loginProgress').show();
+            $('form').submit();
+        }
+    </script>
+}

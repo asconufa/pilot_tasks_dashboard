@@ -1,0 +1,23 @@
+﻿@using System.Threading.Tasks
+@model IEnumerable<Ascon.Pilot.WebClient.ViewModels.FileViewModel>
+
+<div class="file-list">
+    @if (Model == null || !Model.Any())
+    {
+        <p>файлы в папке отсутствуют</p>
+    }
+    else
+    {
+        foreach (var fileModel in Model.OrderBy(x => !x.IsFolder).ThenBy(x => x.ObjectTypeId != ApplicationConst.SourcefolderTypeid).ThenBy(x => x.Name))
+        {
+            if (fileModel.IsFolder)
+            {
+                @await Html.PartialAsync("Components/FilesPanel/_ListFolder", fileModel)
+            }
+            else
+            {
+                @await Html.PartialAsync("Components/FilesPanel/_ListFile", fileModel)
+            }
+        }
+    }
+</div>

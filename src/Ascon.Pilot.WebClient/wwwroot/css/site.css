@@ -1,0 +1,395 @@
+﻿html, body,
+.body-content {
+    height: 100%;
+}
+
+body {
+    padding-top: 100px;
+}
+
+.breadcrumb li {
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.breadcrumb li a {
+    display: inline;
+}
+
+.toolbar {
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 50px;
+    height: 50px;
+    background-color: #2f2f2f;
+    border-radius: 0;
+    z-index: 1030;
+}
+
+.toolbar a {
+    color: #9d9d9d;
+    text-decoration: none;
+    padding: 5px 10px;
+    font-size: 16px;
+}
+
+.toolbar a:hover {
+    color: #fff;
+}
+
+@media(max-width: 767px) {
+    .toolbar span.glyphicon {
+        font-size: 20px;
+    }
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.body-content > footer {
+    text-align: center;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+body > .container {
+  padding: 60px 15px 0;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/*prevent buttons from wrapping*/
+.btn-group {
+    white-space: nowrap;
+}
+.btn-group > .btn {
+    float: inherit;
+}
+.btn-group > .btn + .btn {
+    margin-left: -4px;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+/*input,
+select,
+textarea {
+    max-width: 280px;
+}*/
+
+.glyphicon-spin {
+    -webkit-animation: spin 1000ms infinite linear;
+    animation: spin 1000ms infinite linear;
+}
+
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+/*------------Menu-------------------*/
+
+a#menuToggler {
+    color: #9d9d9d;
+    padding-right: 10px;
+}
+
+a#menuToggler:hover {
+    color: white;
+}
+
+#menu {
+    position:absolute;    
+    top: 51px;
+    bottom: 0px;
+    left: -200px;    
+    background-color: #2f2f2f;
+    color: #9d9d9d;
+    z-index: 1030;
+    width: 200px;
+    border-right: 1px solid black;
+}
+
+#menu.menu-slide-in {
+    left: 0;
+    animation: menu-slide-in 0.3s forwards;    
+}
+
+#menu.menu-slide-out {
+    left: -200px;
+    animation: menu-slide-out 0.3s forwards;    
+}
+
+@keyframes menu-slide-in {
+    0% { left: -200px; }
+    100% { left: 0; }
+}
+   
+@keyframes menu-slide-out {
+    0% { left: 0; }
+    100% { left: -200px; }
+}
+
+#menu ul {
+    display: block;
+    list-style: none;
+    margin: 0;    
+    padding: 0;
+    font-size: 1.2em;
+}
+
+#menu ul li {
+    display: block;
+    padding: 10px;
+}
+
+#menu ul li a {
+    color: #9d9d9d;
+    text-decoration: none;
+}
+
+#menu ul li:hover {    
+    background-color: #3f3f3f;
+    color: white;
+}
+
+/*--------------------------------------Modal preview---------------------------*/
+
+@media (min-width: 992px) {
+  .modal-lg {
+    width: 900px;
+  }
+}
+
+#viewModalContent img {
+    border: 1px solid lightgray;
+    margin-bottom: 15px;
+    min-width: 200px;
+    min-height: 200px;
+}
+
+#viewModalInfo {
+    padding-top: 15px;
+}
+
+.field-validation-error {
+    color: #a94442;
+}
+
+/*------------FILE CARD grid-------------------*/
+
+.file-grid .file-card {
+    height: 150px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.file-grid .file-card {
+    border-radius: 5px;
+    border: 1px solid #eeeeee;
+}
+
+.file-grid .file-card:hover {
+    background-color: #f5f5f5;
+}
+
+.file-grid .file-card .file-card-icon {
+    padding: 5px;
+    position: relative;
+}
+
+.file-grid .file-card .file-card-icon div {
+    position: relative;
+    height: 70px;
+    width: 70px;
+}
+
+.file-grid .file-card.with-thumbnail .file-card-icon img {
+    border: 1px solid #eeeeee;
+    max-height: 70px;
+    max-width: 70px;
+    display: block;
+    margin: auto;
+}
+
+.file-grid .file-card:not(.with-thumbnail) .file-card-icon img {
+    height: 70px;
+    width: 70px;
+    display: block;
+    margin: auto;
+}
+
+.file-grid .file-card .file-card-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 3em;
+    text-align: center;
+}
+
+.file-grid .file-card.active {
+    background-color: #428bca;
+    color: white;
+}
+
+.file-grid .file-card.active .file-card-name a {
+    color: white
+}
+
+.file-grid .file-card.back {
+    display: table;
+}
+
+.file-grid .file-card.back div {
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.file-grid .file-card.back div .glyphicon {
+    font-size: 2em
+}
+
+/*-------------file-card for list-------------------*/
+
+.file-list .file-card {
+    border: 1px solid #eeeeee;
+    border-bottom: none;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.file-list .file-card:hover {
+    background-color: #f5f5f5;
+}
+
+.file-list .file-card:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.file-list .file-card:last-child {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.file-list .file-card.active {
+    background-color: #428bca;
+    color: white;
+}
+
+.file-list .file-card.active .file-card-name a {
+    color: white
+}
+
+.file-list .file-card .file-card:hover {
+    border: 1px solid #eeeeee;
+    border-radius: 5px;
+}
+
+.file-list .file-card .file-card-icon,
+.file-list .file-card .file-card-name,
+.file-list .file-card .file-card-info,
+.file-list .file-card .file-card-buttons
+{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.file-list .file-card .file-card-icon {
+    padding: 5px;
+    width: 5%;
+    position: relative;
+}
+
+.file-list .file-card .file-card-name {
+    width: 85%;
+}
+
+.file-list .file-card .file-card-info {
+    white-space: nowrap;
+    width: 5%;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.file-list .file-card .file-card-buttons {
+    width: 5%;
+    padding-right: 10px;
+    padding-left: 5px;
+}
+
+.file-list .file-card .file-card-icon img {
+    display: block;
+    text-align: center;
+}
+
+.file-list .file-card .file-card-icon div {
+    display: block;
+    vertical-align: middle;
+    height: 50px;
+    width: 50px;
+}
+
+.file-list .file-card:not(.with-thumbnail) .file-card-icon img {
+    height: 50px;
+    width: 50px;
+}
+
+.file-list .file-card.with-thumbnail .file-card-icon img {
+    border: 1px solid lightgray;
+    max-height: 50px;
+    max-width: 50px;
+    margin: auto;
+}
+
+.file-list .file-card.back {
+    height: 50px;
+    display: table;
+    width: 100%;
+}
+
+.file-list .file-card.back div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.file-list .file-card.back .glyphicon {
+    font-size: 2em;
+}
+
+/*icon checkboxes*/
+
+.file-card-icon div {
+    position: relative;
+}
+
+.file-card-icon input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.file-list .file-card-icon input[type="checkbox"] {
+    top: 5px;
+}

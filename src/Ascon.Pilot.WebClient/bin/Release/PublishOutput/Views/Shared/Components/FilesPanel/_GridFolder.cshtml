@@ -1,0 +1,16 @@
+﻿@model Ascon.Pilot.WebClient.ViewModels.FileViewModel
+@{
+    var name = Model.Name;
+}
+
+<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 file-card" data-id="@Model.Id" data-name="@Model.Name" onclick="processCardClick(this)">
+    <div class="file-card-icon">
+        <div class="center-block">
+            <img src="@Url.Action("GetTypeIcon", "Home", new {id = Model.ObjectTypeId})" alt="@Model.Name"/>
+        </div>
+        <input name="objectsIds" type="checkbox" value="@Model.Id" />
+    </div>
+    <div class="file-card-name">
+        <a href="@Url.Action("Index", "Files", new {id = Model.Id, isSource = Model.ObjectTypeId == ApplicationConst.SourcefolderTypeid || ViewBag.IsSource })">@name</a>
+    </div>
+</div>

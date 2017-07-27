@@ -1,0 +1,17 @@
+﻿@using System.Threading.Tasks
+@model IEnumerable<Ascon.Pilot.WebClient.ViewModels.FileViewModel>
+
+<div class="file-grid">
+    @if (Model == null || !Model.Any())
+    {
+        <p>файлы в папке отсутствуют</p>
+    }
+    else
+    {
+        foreach (var fileModel in Model.OrderBy(x => !x.IsFolder).ThenBy(x => x.ObjectTypeId != ApplicationConst.SourcefolderTypeid).ThenBy(x => x.Name))
+        {
+            var partialViewName = fileModel.IsFolder ? "Components/FilesPanel/_GridFolder" : "Components/FilesPanel/_GridFile";
+            @Html.Partial(partialViewName, fileModel)
+        }
+    }
+</div>

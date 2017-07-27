@@ -1,0 +1,120 @@
+﻿@using System.Linq;
+@using System.Threading.Tasks;
+@using System.Collections.Generic;
+@using Ascon.Pilot.Core;
+@using Ascon.Pilot.Server.Api.Contracts;
+
+@model List<PilotTask>
+@{
+    ViewBag.Title = "Задания";
+    Layout = "_FilesLayout";
+}
+
+<html>
+    <head>
+        <title>Задания</title>
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-md-3">
+                <!--Здесь отображаются фильтры по заданиям-->
+                <h3 align="center">Фильтры</h3>
+                <style>
+                    .layer {
+                        overflow: auto;
+                        height: 430px;
+                        border: solid 0.5px white
+                    }
+                </style>
+                <ul class="nav nav-pills nav-stacked layer">
+                    <li><a href="@Url.Action("Tasks", "Home")">Все задания</a></li>
+                    <li><a href="@Url.Action("Tasks", "Home", new { filter = "allExpired"})">Все просроченные</a></li>
+                    <li><a href="@Url.Action("Tasks", "Home", new { filter = "stage", stage = 5 })">Завершённые</a></li>
+                    <li><a href="@Url.Action("Tasks", "Home", new { filter = "stage", stage = 4 })">Ожидающие проверки</a></li>
+                    <li><a href="@Url.Action("Tasks", "Home", new { filter = "stage", stage = 3 })">Отозванные</a></li>
+                    <li><a href="@Url.Action("Tasks", "Home", new { filter = "stage", stage = 2 })">В работе</a></li>
+                    <li><a href="@Url.Action("Tasks", "Home", new {filter = "stage", stage = 1})">Выданные</a></li>
+                    <li>
+                        @using (Html.BeginForm("Tasks", "Home", FormMethod.Get))
+                        {
+                            <h5>Фильтр по названию проекта</h5>
+                            <div>
+                                @Html.TextBox("projectName")
+                            </div>
+                            <div>
+                                <input type="checkbox" name="isExpired" title="Просроченные" id="expired" />
+                                @Html.Label("isExpired", "Только просроченные")
+                            </div>
+                            <div align="center">
+                                <input type="submit" value="Поиск" />
+                            </div>
+                        }
+                    </li>
+                    <li>
+                        @using (Html.BeginForm("Tasks", "Home", FormMethod.Get))
+                        {
+                            <h5>Фильтр по ФИО исполнителя</h5>
+                            <div>
+                                @Html.DropDownList("executorName", new SelectList(Model.Select(x => x.Executor).Distinct()), "Выберите исполнителя")
+                            </div>
+                            <div>
+                                <input type="checkbox" name="expiredByPerson" id="expiredByPerson" />
+                                @Html.Label("expiredByPerson", "Только просроченные")
+                            </div>
+                            <div align="center">
+                                <input type="submit" value="Поиск" />
+                            </div>
+                        }
+                    </li>
+                    <li>
+                        <form autocomplete="on" method="get" action="~/Home/Tasks">
+                            <h5>Фильтр по подразделению</h5>
+                            <div>
+                                <input type="text" name="orgUnit" autocomplete="on"/>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="expiredByOrgUnit" id="expiredByOrgUnit"/>
+                                @Html.Label("expiredByOrgUnit", "Только просроченные")
+                            </div>
+                            <div align="center">
+                                <input type="submit" value="Поиск"/>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-offset-3">
+                <h1 align="center">Задания</h1>
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <th>Заголовок задания</th>
+                        <th>Инициатор</th>
+                        <th>Исполнитель</th>
+                        <th>Выдано</th>
+                        <th>Срок</th>
+                        <th>Выполнено</th>
+                    </tr>
+                        @foreach (var task in Model)
+                        {
+                            <tr>
+                                <td>@task.Title</td>
+                                <td>@task.Initiator</td>
+                                <td>@task.Executor</td>
+                                <td>@task.DateOfAssignment.ToString()</td>
+                                <td>@task.DeadlineDate.ToString()</td>
+                                @if (task.DateOfCompletion != DateTime.MinValue.ToLocalTime())
+                                {
+                                    <td>@task.DateOfCompletion.ToString()</td>
+                                }
+                                else
+                                {
+                                    <td>Не завершено</td>
+                                }
+                            </tr>
+                            }
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

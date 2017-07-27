@@ -1,0 +1,12 @@
+﻿@model string
+@{
+    ViewBag.Title = "Ошибка";
+}
+
+<h3 class="text-danger">При обработке запроса произошла ошибка</h3>
+@if (!string.IsNullOrEmpty(Model))
+{
+    <h4>
+        <p>@Model</p>
+    </h4>
+}

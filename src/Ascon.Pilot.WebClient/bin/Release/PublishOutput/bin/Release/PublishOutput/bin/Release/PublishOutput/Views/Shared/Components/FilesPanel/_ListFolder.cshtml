@@ -1,0 +1,20 @@
+﻿@using System.Threading.Tasks
+@model Ascon.Pilot.WebClient.ViewModels.FileViewModel
+@{
+    var name = Model.Name;
+}
+
+<div class="file-card" onclick="processCardClick(this)" data-id="@Model.Id" data-name="@Model.Name">
+    <div class="file-card-icon">
+        <div>
+            <img src="@Url.Action("GetTypeIcon", "Home", new {id = Model.ObjectTypeId})" alt="@Model.ObjectTypeName"/>
+        </div>
+        <input name="objectsIds" type="checkbox" value="@Model.Id" />
+    </div>
+    <div class="file-card-name" style="width: 100%">
+        <a href="@Url.Action("Index", "Files", new {id = Model.Id, isSource = Model.ObjectTypeId == ApplicationConst.SourcefolderTypeid || ViewBag.IsSource})">@name</a>
+    </div>
+    <div class="file-card-info">
+        <span title="Количество элементов в папке">@Model.ChildrenCount</span>
+    </div>
+</div>

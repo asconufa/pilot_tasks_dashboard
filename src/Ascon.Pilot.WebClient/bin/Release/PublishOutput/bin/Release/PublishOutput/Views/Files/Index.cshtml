@@ -1,0 +1,68 @@
+﻿@using System.Threading.Tasks
+@using Ascon.Pilot.Core
+
+@model Ascon.Pilot.WebClient.ViewModels.UserPositionViewModel
+@{
+    ViewBag.Title = "Файлы";
+    Layout = "_FilesLayout";
+}
+
+<form action="/Files/DownloadArchive" id="downloadArchiveForm" method="post">
+    <div class="row">
+        <div class="col-md-4 hidden-xs hidden-sm collapse in" id="sidePanel" style="padding-right: 0;">
+            @await Component.InvokeAsync("SidePanel", new { id = Model.CurrentFolderId })
+        </div>
+        <div class="col-md-8 col-sm-12" id="filesPanelContainer">
+            <div>
+                @await Component.InvokeAsync("Breadcrumbs", new { id = Model.CurrentFolderId })
+            </div>
+            <div id="filesPanel" style="padding-bottom: 15px;">
+                @await Component.InvokeAsync("FilesPanel", new { folderId = Model.CurrentFolderId, panelType = Model.FilesPanelType, onlySource = ViewBag.IsSource ?? false })
+            </div>
+        </div>
+    </div>
+</form>
+
+@await Html.PartialAsync("_RenameModal")
+@await Html.PartialAsync("_RemoveModal")
+@await Html.PartialAsync("_UploadModal")
+
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="viewModalLabel">Просмотр</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8 col-sm-12" id="viewModalContent"></div>
+                    <div class="col-md-4 col-sm-12" id="viewModalInfo"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default" id="modalDownloadButton">
+                    <i class="glyphicon glyphicon-download-alt"></i>&nbsp;Скачать
+                </a>
+                <a id="previewButton" class="btn btn-default" target="_blank" href="#" style="display: none">
+                    <i class="glyphicon glyphicon-eye-open"></i>&nbsp;Просмотр
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        var baseFilesUrl = '/Files/Index/';
+        var getFilesUrl = '@Html.Raw(Url.Action("GetObject", "Files"))';
+        var getSourceUrl = '@Html.Raw(Url.Action("GetSource", "Files"))';
+        var getChildsUrl = '@Html.Raw(Url.Action("GetNodeChilds", "Files"))';
+        var getSidePanelUrl = '@Html.Raw(Url.Action("SidePanel", "Files"))';
+        var downloadUrl = '@Html.Raw(Url.Action("Download"))';
+        var ROOT_ID = '@DObject.RootId';
+        var currentFolderId = '@Model.CurrentFolderId';
+    </script>
+    <script type="text/javascript" src="@Url.Content("~/js/files.js")" asp-append-version="true"></script>
+}

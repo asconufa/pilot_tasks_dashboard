@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Предпросмотр";
+}
+
+<style type="text/css">
+    .toolbar {
+        display: none;
+    }
+
+    body {
+        padding-top: 50px;
+    }
+</style>
+
+<div id="pdf">
+    <object data="@Html.Raw(ViewBag.Url as string)" type="application/pdf" width="100%" height="100%">
+        <div id="errorMessage">
+            <p class="alert alert-warning"><b>Судя по всему, ваш браузер не поддерживает просмотр PDF документов.</b>
+            </p>
+            Вы можете скачать документ по ссылке: <a href="@Html.Raw(ViewBag.Url as string)" title="Скачать" class="btn btn-default"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;Скачать</a>
+        </div>
+    </object>
+</div>
+
+<style type="text/css">
+    #errorMessage {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    #pdf {
+        height: calc(100% - 50px);
+        width: 100%;
+        padding: 0;
+        position: fixed;
+        display: block;
+        left: 0;
+        top: 50px;
+    }
+</style>

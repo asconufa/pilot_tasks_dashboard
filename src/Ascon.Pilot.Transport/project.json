@@ -1,0 +1,18 @@
+﻿{
+  "version": "0.0.1-*",
+  "description": "Ascon.Pilot.Transport Class Library",
+
+  "dependencies": {
+    "NETStandard.Library": "1.6.1",
+    "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
+    "Castle.Core": "4.0.0",
+    "protobuf-net": "2.2.0",
+    "Ascon.Pilot.Core": "0.0.1-*"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  }
+}
